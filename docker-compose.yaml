@@ -12,7 +12,7 @@ services:
     volumes:
       - evolution_instances:/evolution/instances
     networks:
-      - evolution-net
+      - dokploy-network
     env_file:
       - .env
     expose:
@@ -21,7 +21,7 @@ services:
   redis:
     image: redis:latest
     networks:
-      - evolution-net
+      - dokploy-network
     container_name: redis
     command: >
       redis-server --port 6379 --appendonly yes
@@ -74,10 +74,7 @@ services:
 volumes:
   evolution_instances:
   evolution_redis:
-  postgres_data:
-
 
 networks:
-  evolution-net:
-    name: evolution-net
-    driver: bridge
+  dokploy-network:
+    external: true
